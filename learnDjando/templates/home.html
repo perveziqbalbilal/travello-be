@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="add" method="post">
+    {% csrf_token %}
+    Enter the first num: <input type="text" name = "num1"><br><br>
+    Enter the 2nd num: <input type="text" name = "num2"><br><br>
+
+<button type="submit">submit</button>
+</form>
+
+{% endblock  %}
+
+
+
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+
+# Create your views here.
+def home(request):
+    return render(request,'home.html')
+
+def add(request):
+    valu1 = request.POST['num1']
+    valu2 = request.POST['num2']
+    res = valu1 + valu2
+    return render(request, 'result.html',{'result': res})
